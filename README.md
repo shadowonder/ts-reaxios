@@ -11,6 +11,14 @@
 * Husky 更加简单的使用git hooks
 * Conventional Changelog 帮我们通过提交代码提交信息自动生成change log
 
+然后在安装我们需要的框架：
+F:\JavaScript\Learning-code\ts-axios>npm install -D webpack webpack-dev-middleware webpack-hot-middleware ts-loader tslint-loader express body-parser
+
+* webpack-dev-middleware 和 webpack-hot-middleware是express的中间件
+* ts-loader tslint-loader webpack需要的ts相关的loader
+* express 服务端框架
+* body-parser 是 express的中间件
+
 ##脚手架script
 lint 使用lint检测ts代码
 build tsc做编译，rollup做构建
@@ -39,10 +47,17 @@ semantic-release 发布我们的包
 - 最终使用git push origin master 推送到目标
 
 
-# 文件结构
-index.ts：入口文件
+## 文件结构
+文件
+- index.ts：入口文件
 
-types：文件夹，包含着所有的接口文件，接口文件针对着每一个ts文件都有一个规则文件
-  index.ts: 主页面接口文件，
-    MyAxiosRequestConfig 包含着ajax的请求参数，比如url，method等等，规范化的接口文件，不包含数据
+文件夹
+> types：文件夹，包含着所有的接口文件，接口文件针对着每一个ts文件都有一个规则文件
+>> index.ts: 主页面接口文件，
+>>> MyAxiosRequestConfig 包含着ajax的请求参数，比如url，method等等，规范化的接口文件，不包含数据
   
+> examples: 文件夹，包含着sample文件目录，每一个测试demo会单独成立一个文件夹
+>> webpack.config.js webpack的配置文件.
+>> server.js express的服务器启动文件
+>> index.html 引导文件
+>> global.css 引导页样式
