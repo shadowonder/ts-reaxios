@@ -45,6 +45,24 @@ router.get('/simple/get', function(req, res) {
 router.get('/base/get', function(req, res) {
   res.json(req.query)
 })
+//监听base的post请求
+router.post('/base/post', function(req, res) {
+  res.json(req.body)
+})
+//监听buffer的请求，这里就是通过buff来进行拼接数组，然后通过concat拼接数组，最终通过res输出出去
+router.post('/base/buffer', function(req, res) {
+  let msg = []
+  req.on('data', (chunk) => {
+    if (chunk) {
+      msg.push(chunk)
+    }
+  })
+  req.on('end', () => {
+    let buf = Buffer.concat(msg)
+    res.json(buf.toJSON())
+  })
+})
+
 
 
 app.use(router)
@@ -52,3 +70,5 @@ app.use(router)
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
+
+
