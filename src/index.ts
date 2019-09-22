@@ -1,16 +1,18 @@
-import { MyAxiosRequestConfig } from './types' //引入接口
+import { MyAxiosRequestConfig, AxiosPromise, AxiosResponse } from './types' //引入接口
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
-import { transformRequest } from './helpers/data'
+import { transformRequest, transformResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
 /**
  * 使用模块化的构建思想，把请求逻辑提取到xhr.ts文件当中 然后再这里引用
  * @param config
  */
-function myaxios(config: MyAxiosRequestConfig): void {
+function myaxios(config: MyAxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  xhr(config)
+  return xhr(config).then(res => {
+    return transformResponseData(res)
+  })
 }
 
 /**
@@ -36,6 +38,12 @@ function transformRequestData(config: MyAxiosRequestConfig): any {
 function transformHeaders(config: MyAxiosRequestConfig) {
   const { headers = {}, data } = config // 这里给headers一个默认的空值，因为在我们的辅助函数中我们直接进行判断headers是否为空
   return processHeaders(headers, data)
+}
+
+// 对相应提进行格式化，我们返回一个object而不是一个字符串
+function transformResponseData(res: AxiosResponse) {
+  res.data = transformResponse(res.data)
+  return res
 }
 
 export default myaxios

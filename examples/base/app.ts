@@ -80,10 +80,46 @@ import axios from '../../src/index'
 // })
 
 
+// /*******************************************************************
+//  * Header 的请求测试用例
+//  *******************************************************************/
+// // 发送普通对象，没有配置headers
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: {
+//     a: 1,
+//     b: 2
+//   }
+// })
+// // 手动配置
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   headers: {
+//     'content-type': 'application/json;'
+//   },
+//   data: {
+//     a: 1,
+//     b: 2
+//   }
+// })
+
+// // 配置了urlparams对象
+// const paramsString = 'q=URLUtils.searchParams&topic=api'
+// const searchParams = new URLSearchParams(paramsString)
+
+// // 在这里，我们设置了searchparams对象，但是我们并没有设置属性。
+// // 但是浏览器会自动识别并帮我们设置了属性
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: searchParams
+// })
+
 /*******************************************************************
- * Header 的请求测试用例
+ * 响应体获取测试用例
  *******************************************************************/
-// 发送普通对象，没有配置headers
 axios({
   method: 'post',
   url: '/base/post',
@@ -91,33 +127,21 @@ axios({
     a: 1,
     b: 2
   }
+}).then((res) => {
+  console.log(res)
 })
-// 手动配置
+
 axios({
   method: 'post',
   url: '/base/post',
-  headers: {
-    'content-type': 'application/json;'
-  },
+  responseType: 'json',
   data: {
-    a: 1,
-    b: 2
+    a: 3,
+    b: 4
   }
+}).then((res) => {
+  console.log(res)
 })
-
-// 配置了urlparams对象
-const paramsString = 'q=URLUtils.searchParams&topic=api'
-const searchParams = new URLSearchParams(paramsString)
-
-// 在这里，我们设置了searchparams对象，但是我们并没有设置属性。
-// 但是浏览器会自动识别并帮我们设置了属性
-axios({
-  method: 'post',
-  url: '/base/post',
-  data: searchParams
-})
-
-
 
 
 

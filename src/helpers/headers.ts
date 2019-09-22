@@ -29,3 +29,27 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+/**
+ * 对头部信息进行解析
+ * @param headers
+ */
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+  if (!headers) {
+    return parsed
+  }
+  // 把每一行的数据转换成一个keyvalue然后把所有的kv转换为对象
+  headers.split('\r\n').forEach(line => {
+    let [key, val] = line.split(':')
+    key = key.trim().toLowerCase()
+    if (!key) {
+      return
+    }
+    if (val) {
+      val = val.trim()
+    }
+    parsed[key] = val
+  })
+  return parsed
+}
