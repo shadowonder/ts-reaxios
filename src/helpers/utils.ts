@@ -1,7 +1,7 @@
 const toString = Object.prototype.toString
-//检测当前value是否为日期
+// 检测当前value是否为日期
 export function isDate(val: any): val is Date {
-  //使用参数谓词保护，这样就可以直接使用val中date函数了
+  // 使用参数谓词保护，这样就可以直接使用val中date函数了
   return toString.call(val) === '[object Date]'
 }
 
